@@ -1,10 +1,12 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
   images: {
-    domains: ['example.com'],
+    unoptimized: true,
   },
-  reactStrictMode: true,
-  env: {
-    CUSTOM_VAR: process.env.CUSTOM_VAR || 'default_value',
-  },
-  // Further configurations can be added here
-};
+  basePath: process.env.NODE_ENV === 'production' ? '/mofarmland--website' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/mofarmland--website/' : '',
+}
+
+module.exports = nextConfig
