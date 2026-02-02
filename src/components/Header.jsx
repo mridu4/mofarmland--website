@@ -31,7 +31,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <img 
-              src={`${process.env.NODE_ENV === 'production' ? '/mofarmland--website' : ''}/mofarmland--website/images/logo.png`}
+              src="/mofarmland--website/images/logo.png"
               alt="Mofarm Lands & Properties" 
               className={`h-12 transition-all ${scrolled ? '' : 'brightness-0 invert'}`}
             />
