@@ -1,4 +1,8 @@
 // Property data for Mofarm Lands & Properties
+// Each property now supports multiple images for gallery view
+
+const basePath = '/mofarmland--website';
+
 export const properties = [
   {
     id: 'subukia-paradise',
@@ -10,7 +14,11 @@ export const properties = [
     installmentPrice: 250000,
     deposit: 75000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/subukia.jpg',
+    images: [
+      `${basePath}/images/subukia.jpg`,
+      `${basePath}/images/subukia2.jpg`,
+      `${basePath}/images/subukia3.jpeg`,
+    ],
     badge: 'Best Value',
     color: 'orange',
     description: 'Subukia Paradise is located just 30 minutes from Subukia Town, with water and electricity available, making it ideal for both settlement and farming. Enjoy a beautiful, serene environment with stunning views.',
@@ -26,7 +34,11 @@ export const properties = [
     installmentPrice: 550000,
     deposit: 100000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/kenol.jpg',
+    images: [
+      `${basePath}/images/kenol.jpg`,
+      `${basePath}/images/kenol2.jpg`,
+      `${basePath}/images/kenol3.jpg`,
+    ],
     badge: 'Popular',
     color: 'burgundy',
     description: 'Discover Chaka Phase 5 in Githungo, a peaceful and fertile area just 20 minutes from New Center. With water and electricity available, it\'s perfect for building a home, farming, or investing for the future.',
@@ -42,7 +54,9 @@ export const properties = [
     installmentPrice: 350000,
     deposit: 100000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/nanyuki.jpg',
+    images: [
+      `${basePath}/images/nanyuki.jpg`,
+    ],
     badge: 'Popular',
     color: 'burgundy',
     description: 'Prime plots in Nanyuki, the gateway to Mt. Kenya. Enjoy temperate climate year-round and be part of a growing tourist destination with excellent investment potential.',
@@ -58,7 +72,11 @@ export const properties = [
     installmentPrice: 1700000,
     deposit: 500000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/kenol4.jpg',
+    images: [
+      `${basePath}/images/kenol4.jpg`,
+      `${basePath}/images/kenol5.jpg`,
+      `${basePath}/images/kenol6.jpg`,
+    ],
     badge: 'Premium',
     color: 'orange',
     description: 'Premium estate along Thika-Nairobi highway corridor. Prime location with excellent infrastructure, perfect for residential or commercial development.',
@@ -74,7 +92,10 @@ export const properties = [
     installmentPrice: 1500000,
     deposit: 500000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/kenol3.jpg',
+    images: [
+      `${basePath}/images/kenol3.jpg`,
+      `${basePath}/images/kenol4.jpg`,
+    ],
     badge: 'Premium',
     color: 'orange',
     description: 'Compact premium plots in our Kenol estate with the same great location and amenities. Ideal for residential homes with all infrastructure in place.',
@@ -90,7 +111,10 @@ export const properties = [
     installmentPrice: 1200000,
     deposit: 500000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/subukia2.jpg',
+    images: [
+      `${basePath}/images/subukia2.jpg`,
+      `${basePath}/images/subukia.jpg`,
+    ],
     badge: 'Mt. Kenya View',
     color: 'burgundy',
     description: 'Premium plots in Mweiga with breathtaking panoramic views of Mt. Kenya. Rich volcanic soil perfect for farming and ideal climate year-round.',
@@ -106,7 +130,11 @@ export const properties = [
     installmentPrice: 1200000,
     deposit: 500000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/cheka_phase_2.jpg',
+    images: [
+      `${basePath}/images/cheka_phase_2.jpg`,
+      `${basePath}/images/kenol.jpg`,
+      `${basePath}/images/kenol2.jpg`,
+    ],
     badge: 'Prime Location',
     color: 'orange',
     description: 'Chaka Phase 2, strategically located in New Center, only 5 minutes from Chaka Town. Positioned on the main tarmac road, it is perfect for commercial ventures or settlement.',
@@ -122,7 +150,10 @@ export const properties = [
     installmentPrice: 400000,
     deposit: 100000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/kenol2.jpg',
+    images: [
+      `${basePath}/images/kenol2.jpg`,
+      `${basePath}/images/kenol.jpg`,
+    ],
     badge: 'Affordable',
     color: 'burgundy',
     description: 'Discover Chaka Phase 6 in Githungo, a quiet, fertile and steadily developing area just 10 minutes from Lusoi Centre. With borehole water and electricity already available, this is a ready-to-build location ideal for home construction and productive farming.',
@@ -138,7 +169,11 @@ export const properties = [
     installmentPrice: 750000,
     deposit: 150000,
     duration: '6 Months',
-    image: '/mofarmland--website/images/kenol5.jpg',
+    images: [
+      `${basePath}/images/kenol5.jpg`,
+      `${basePath}/images/kenol6.jpg`,
+      `${basePath}/images/kenol4.jpg`,
+    ],
     badge: 'New Release',
     color: 'orange',
     description: 'Our newest Chaka release! Limited premium plots with stunning Mt. Kenya views and excellent infrastructure. Don\'t miss this opportunity.',

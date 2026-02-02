@@ -1,6 +1,13 @@
+'use client';
+import { useState } from 'react';
 import { formatPrice, companyInfo } from '@/data/properties';
+import ImageGallery from './ImageGallery';
 
 export default function PropertyCard({ property }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const images = property.images || [property.image];
+  
   const colorClasses = {
     burgundy: 'bg-primary',
     orange: 'bg-accent',
@@ -10,24 +17,108 @@ export default function PropertyCard({ property }) {
     `Hello Mofarm! I'm interested in ${property.name} at ${formatPrice(property.cashPrice)} cash price. Please send me more details.`
   );
 
+  const nextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex(index);
+  };
+
   return (
     <div className="card group">
-      {/* Image */}
+      {/* Image Gallery */}
       <div className="relative h-56 overflow-hidden">
+        {/* Main Image */}
         <img
-          src={property.image}
-          alt={property.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          src={images[currentImageIndex]}
+          alt={`${property.name} - Image ${currentImageIndex + 1}`}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
         
+        {/* Navigation Arrows - Only show if multiple images */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20"
+              aria-label="Previous image"
+            >
+              <svg className="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20"
+              aria-label="Next image"
+            >
+              <svg className="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        )}
+
+        {/* Image Dots Indicator */}
+        {images.length > 1 && (
+          <div className="absolute bottom-14 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => goToImage(index, e)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentImageIndex 
+                    ? 'bg-white w-4' 
+                    : 'bg-white/50 hover:bg-white/75'
+                }`}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Image Counter */}
+        {images.length > 1 && (
+          <div className="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded-full z-20">
+            {currentImageIndex + 1} / {images.length}
+          </div>
+        )}
+
+        {/* Fullscreen Button */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setGalleryOpen(true);
+          }}
+          className="absolute top-4 right-4 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+          style={{ right: images.length > 1 ? '4rem' : '1rem' }}
+          aria-label="View fullscreen"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+        </button>
+        
         {/* Badge */}
-        <span className={`absolute top-4 left-4 px-3 py-1.5 ${colorClasses[property.color]} text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-lg`}>
+        <span className={`absolute top-4 left-4 px-3 py-1.5 ${colorClasses[property.color]} text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-lg z-20`}>
           {property.badge}
         </span>
 
         {/* Price overlay */}
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="absolute bottom-4 left-4 right-4 z-10">
           <div className="text-white">
             <span className="text-sm opacity-80">Cash Price</span>
             <div className="text-2xl font-display font-bold">{formatPrice(property.cashPrice)}</div>
@@ -112,6 +203,14 @@ export default function PropertyCard({ property }) {
           </a>
         </div>
       </div>
+
+      {/* Fullscreen Image Gallery Modal */}
+      <ImageGallery
+        images={images}
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        initialIndex={currentImageIndex}
+      />
     </div>
   );
 }
